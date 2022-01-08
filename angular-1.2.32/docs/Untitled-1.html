@@ -1,0 +1,302 @@
+<div class="modal fade mymodal-split" id="modal_add_vehicles" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    Add Fleet
+                </h4>
+            </div>
+            <div class="glink-progress w100-i" ng-if="!onsubmitVehicles || onrequestVehicles">
+                <div class="probride glink-progress-bar probride glink-progress-bar-on-cruds">
+                </div>
+            </div>
+            <div class="modal-body pd0-i">
+                <form autocomplete="off" name="form" ng-submit="submit_form_vehicle('add')">
+                    <div class="row mg10 bg-modal-op">
+                        <div class="col-md-6 infor-tab mt-col-modal-L">
+                            <div class="pdLR10">
+                                <div class="layout-fixed layout-fixed-480-block pdT7">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/assignedvehicle.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Name:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="Name"  class="input-field-l-4 full-w form-control" type="text" ng-model="addVehiclesData.name" title="Name" required />
+                                        <i class="icon-svg required" title="This field is required"></i>
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/description.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Description:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="Description" name="description" class="input-field-l-4 full-w form-control" type="text" ng-model="addVehiclesData.description" title="Description" />
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/savedqueries.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Vin:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="Vin" name="vin" class="input-field-l-4 full-w form-control" type="text" ng-model="addVehiclesData.vin" title="Vin" required />
+                                        <i class="icon-svg required" title="This field is required"></i>
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/driverlicense.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                License Plate:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="License Plate" name="license_plate" class="input-field-l-4 full-w form-control" type="text" ng-model="addVehiclesData.license_plate" title="License Plate" required />
+                                        <i class="icon-svg required" title="This field is required"></i>
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block pdB7">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/lastfieldworker.ico'">
+                                                    </ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Current Assignee:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <ui-select ng-model="addVehiclesData.assign" theme="bootstrap" ng-disabled="false" close-on-select="true" class="full-w" title="Choose an user">
+                                            <ui-select-match placeholder="Search User" allow-clear="true">
+                                                {{addVehiclesData.assign.user_position}}
+                                            </ui-select-match>
+                                            <ui-select-choices repeat="add in user_assign_vehicle | propsFilter: {user_position: $select.search}" refresh-delay="0">
+                                                <div ng-bind-html="add.user_position | highlight: $select.search" class="full-w"></div>
+                                            </ui-select-choices>
+                                        </ui-select>                 
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/duedate.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Tabs Expiration Date:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input class="form-control validate_date" datetime-picker="" id="tabs_expiration_date"  onkeypress="return false;" placeholder="Tabs Expiration Date" name="tabs_expiration_date" ng-model="addVehiclesData.tabs_expiration_date" required="" type="text" autocomplete="off" title="Tabs Expiration Date"/>
+                                        <i class="icon-svg required" title="This field is required"></i>
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block res-pdB-col-modal">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/timetable.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Year:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="Year" name="year" class="input-field-l-4 full-w form-control" type="number" ng-model="addVehiclesData.year" title="Year" required />
+                                        <i class="icon-svg required" title="This field is required"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 infor-tab mt-col-modal-R">
+                            <div class="pdLR10">
+                                <div class="layout-fixed layout-fixed-480-block res-pdT-col-modal">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/startingwage.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Make:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="Make" name="make" class="input-field-l-4 full-w form-control" type="text" ng-model="addVehiclesData.make" title="Make" required />
+                                        <i class="icon-svg required" title="This field is required"></i>
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/assignedvehicle.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Model:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="Model" name="model" class="input-field-l-4 full-w form-control" type="text" ng-model="addVehiclesData.model" title="Model" required />
+                                        <i class="icon-svg required" title="This field is required"></i>
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/employeenotes.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Trim Level:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="Trim Level" name="trim_level" class="input-field-l-4 full-w form-control" type="text" ng-model="addVehiclesData.trim_level" title="Trim Level" />
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/referredcustomer.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Engine Liters:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="Engine Liters" name="engine_liters" class="input-field-l-4 full-w form-control" type="text" ng-model="addVehiclesData.engine_liters" title="Engine Liters" />
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/tiresize.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Tire Size:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="Tire Size" name="tire_size" class="input-field-l-4 full-w form-control" type="text" ng-model="addVehiclesData.tire_size" title="Tire Size" />
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/driverlicense.ico'"></ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Drive Type:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <input placeholder="Drive Type" name="drive_type" class="input-field-l-4 full-w form-control" type="text" ng-model="addVehiclesData.drive_type" title="Drive Type" />
+                                    </div>
+                                </div>
+                                <div class="layout-fixed layout-fixed-480-block pdB7">
+                                    <div class="w209px pdR10 v-top-i pdT7">
+                                        <div class="layout-fixed">
+                                            <div class="w35px v-middle-i">
+                                                <div class="bg-transparent bg-none no-border-i pd0-i relative">
+                                                    <ng-include class="icon-svg" src="'../admin/css/images/icons/employeenotes.ico'">
+                                                    </ng-include>
+                                                </div>
+                                            </div>
+                                            <div class="v-middle-i pdL6">
+                                                Note:
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="v-middle-i pdTB7 pdR5 relative">
+                                        <div class="textarea-field-l-4 full-w">
+                                            <div class="input-field-l-4 full-w ng-scope relative">
+                                                <div>
+                                                    <textarea class="h81dot5px full-w form-control textarea-resizable target-dbresize ng-pristine ng-valid ng-touched" name="note" ng-model="addVehiclesData.note" placeholder="Note" type="text">
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-info-op">
+                            Submit
+                        </button>
+                        <button class="btn btn-danger-op" data-dismiss="modal" type="button">
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
